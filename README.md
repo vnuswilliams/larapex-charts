@@ -18,11 +18,26 @@ A Laravel wrapper for apex charts library Check the documentation on: [Larapex C
 
 ## Installation
 
-Use composer.
+Install the Laravel package with Composer:
 
 ```bash
 composer require arielmejiadev/larapex-charts
 ```
+
+You can also install ApexCharts in your frontend bundle (optional):
+
+```bash
+npm install apexcharts --save
+```
+
+Then import it in your `app.js` (or any other frontend entry file):
+
+```js
+import ApexCharts from 'apexcharts'
+window.ApexCharts = ApexCharts
+```
+
+This npm/Vite setup is optional if you prefer using the CDN, or if ApexCharts is already available in your project.
 
 ## Usage
 
@@ -65,12 +80,12 @@ Then in your view (Blade file) add:
  
      {!! $chart->container() !!}
  
-     <script src="{{ $chart->cdn() }}"></script>
- 
      {{ $chart->script() }}
  </body>
  </html>
 ```
+
+`$chart->script()` first uses `window.ApexCharts` (useful when ApexCharts is loaded via npm/Vite), and automatically falls back to the CDN only if ApexCharts is not already available globally.
 
 ### More complex example
 

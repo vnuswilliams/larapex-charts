@@ -53,7 +53,19 @@
             states: {!! json_encode($chart->states()['states']) !!}
         }
 
-        var chart = new ApexCharts(document.querySelector("#{!! $chart->id() !!}"), options);
-        chart.render();
+        var renderChart = function() {
+            var chart = new ApexCharts(document.querySelector("#{!! $chart->id() !!}"), options);
+            chart.render();
+        };
+
+        if (window.ApexCharts) {
+            renderChart();
+            return;
+        }
+
+        var cdnScript = document.createElement('script');
+        cdnScript.src = '{!! $chart->cdn() !!}';
+        cdnScript.onload = renderChart;
+        document.head.appendChild(cdnScript);
     })();
 </script>
