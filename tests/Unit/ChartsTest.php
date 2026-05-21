@@ -1,8 +1,8 @@
-<?php namespace ArielMejiaDev\LarapexCharts\Tests\Unit;
+<?php namespace vnusWilliams\LarapexCharts\Tests\Unit;
 
 use Illuminate\Support\Facades\Artisan;
-use ArielMejiaDev\LarapexCharts\LarapexChart;
-use ArielMejiaDev\LarapexCharts\Tests\TestCase;
+use vnusWilliams\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 class ChartsTest extends TestCase

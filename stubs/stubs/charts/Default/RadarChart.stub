@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\RadarChart
+    public function build(): \vnusWilliams\LarapexCharts\RadarChart
     {
         return (new LarapexChart)->radarChart()
             ->setTitle('Individual Player Stats.')

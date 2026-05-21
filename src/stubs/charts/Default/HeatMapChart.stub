@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\HeatMapChart
+    public function build(): \vnusWilliams\LarapexCharts\HeatMapChart
     {
         return (new LarapexChart)->heatMapChart()
             ->setTitle('Basic radar chart')

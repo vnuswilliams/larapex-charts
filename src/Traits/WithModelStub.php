@@ -1,6 +1,6 @@
 <?php
 
-namespace ArielMejiaDev\LarapexCharts\Traits;
+namespace vnusWilliams\LarapexCharts\Traits;
 
 trait WithModelStub
 {

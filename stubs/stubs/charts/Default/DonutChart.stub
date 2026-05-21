@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\DonutChart
+    public function build(): \vnusWilliams\LarapexCharts\DonutChart
     {
         return (new LarapexChart)->donutChart()
             ->setTitle('Top 3 scorers of the team.')

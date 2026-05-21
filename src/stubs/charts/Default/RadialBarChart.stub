@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\RadialChart
+    public function build(): \vnusWilliams\LarapexCharts\RadialChart
     {
         return (new LarapexChart)->radialChart()
             ->setTitle('Passing effectiveness.')

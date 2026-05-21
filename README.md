@@ -16,6 +16,8 @@
 
 A Laravel wrapper for apex charts library Check the documentation on: [Larapex Chart Docs](https://larapex-charts.netlify.app/).
 
+This repository is inspired by [ArielMejiaDev/larapex-charts](https://github.com/ArielMejiaDev/larapex-charts) and gives full credit to the original project.
+
 ## Installation
 
 Install the Laravel package with Composer:
@@ -55,13 +57,13 @@ $chart = (new LarapexChart)->setTitle('Posts')
 Remember to import the Facade to your controller with 
 
 ```php
-use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
+use vnusWilliams\LarapexCharts\Facades\LarapexChart;
 ```
 
 Or importing the LarapexChart class:
 
 ```php
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 ```
 
 Then in your view (Blade file) add: 

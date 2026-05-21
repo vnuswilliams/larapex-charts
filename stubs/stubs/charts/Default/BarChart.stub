@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\BarChart
+    public function build(): \vnusWilliams\LarapexCharts\BarChart
     {
         return (new LarapexChart)->barChart()
             ->setTitle('San Francisco vs Boston.')
