@@ -23,7 +23,7 @@ This repository is inspired by [ArielMejiaDev/larapex-charts](https://github.com
 Install the Laravel package with Composer:
 
 ```bash
-composer require arielmejiadev/larapex-charts
+composer require vnuswilliams/larapex-charts
 ```
 
 You can also install ApexCharts in your frontend bundle (optional):
