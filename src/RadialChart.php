@@ -1,10 +1,10 @@
 <?php
 
-namespace ArielMejiaDev\LarapexCharts;
+namespace vnusWilliams\LarapexCharts;
 
 
-use ArielMejiaDev\LarapexCharts\Contracts\MustAddSimpleData;
-use ArielMejiaDev\LarapexCharts\Traits\SimpleChartDataAggregator;
+use vnusWilliams\LarapexCharts\Contracts\MustAddSimpleData;
+use vnusWilliams\LarapexCharts\Traits\SimpleChartDataAggregator;
 
 class RadialChart extends LarapexChart implements MustAddSimpleData
 {

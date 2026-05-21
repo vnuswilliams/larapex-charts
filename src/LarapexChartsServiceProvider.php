@@ -1,6 +1,6 @@
 <?php
 
-namespace ArielMejiaDev\LarapexCharts;
+namespace vnusWilliams\LarapexCharts;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -22,7 +22,7 @@ class LarapexChartsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($this->packageBasePath('config/larapex-charts.php'), 'larapex-charts');
 
         $this->commands([
-            \ArielMejiaDev\LarapexCharts\Console\ChartMakeCommand::class,
+            \vnusWilliams\LarapexCharts\Console\ChartMakeCommand::class,
         ]);
     }
 

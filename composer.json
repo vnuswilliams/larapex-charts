@@ -12,7 +12,7 @@
     "type": "library",
     "authors": [
         {
-            "name": "ArielMejiaDev",
+            "name": "vnusWilliams",
             "email": "arielmejiadev@gmail.com"
         }
     ],
@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ArielMejiaDev\\LarapexCharts\\": "src"
+            "vnusWilliams\\LarapexCharts\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ArielMejiaDev\\LarapexCharts\\Tests\\": "tests"
+            "vnusWilliams\\LarapexCharts\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -42,10 +42,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider"
+                "vnusWilliams\\LarapexCharts\\LarapexChartsServiceProvider"
             ],
             "aliases": {
-                "LarapexChart": "ArielMejiaDev\\LarapexCharts\\Facades\\LarapexChart"
+                "LarapexChart": "vnusWilliams\\LarapexCharts\\Facades\\LarapexChart"
             }
         }
     },

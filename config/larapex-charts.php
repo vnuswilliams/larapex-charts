@@ -1,6 +1,6 @@
 <?php
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 return [
 

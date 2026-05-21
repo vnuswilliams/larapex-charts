@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\HorizontalBar
+    public function build(): \vnusWilliams\LarapexCharts\HorizontalBar
     {
         return (new LarapexChart)->horizontalBarChart()
             ->setTitle('Los Angeles vs Miami.')

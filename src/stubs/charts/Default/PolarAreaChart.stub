@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\PolarAreaChart
+    public function build(): \vnusWilliams\LarapexCharts\PolarAreaChart
     {
         return (new LarapexChart)->polarAreaChart()
             ->setTitle('Top 3 scorers of the team.')

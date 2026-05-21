@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\LineChart
+    public function build(): \vnusWilliams\LarapexCharts\LineChart
     {
         return (new LarapexChart)->lineChart()
             ->setTitle('Sales during 2021.')

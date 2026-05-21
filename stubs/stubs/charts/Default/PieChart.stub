@@ -2,11 +2,11 @@
 
 namespace {{ namespace }};
 
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+use vnusWilliams\LarapexCharts\LarapexChart;
 
 class {{ class }}
 {
-    public function build(): \ArielMejiaDev\LarapexCharts\PieChart
+    public function build(): \vnusWilliams\LarapexCharts\PieChart
     {
         return (new LarapexChart)->pieChart()
             ->setTitle('Top 3 scorers of the team.')
