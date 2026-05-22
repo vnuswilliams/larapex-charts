@@ -68,7 +68,7 @@ class LarapexChartsServiceProvider extends ServiceProvider
         |
         */
         Blade::directive('larapexChartScripts', function () {
-            return "<?php echo view('larapex-charts::chart.scripts')->render(); ?>";
+            return "<?php echo view('larapex-charts::chart.script')->render(); ?>";
         });
     }
 
