@@ -1,71 +1,30 @@
 <script>
-    (function() {
-        var options =
-        {
-            chart: {
-                id: '{!! $chart->id() !!}',
-                type: '{!! $chart->type() !!}',
-                height: {!! $chart->height() !!},
-                width: '{!! $chart->width() !!}',
-                toolbar: {!! $chart->toolbar() !!},
-                zoom: {!! $chart->zoom() !!},
-                fontFamily: '{!! $chart->fontFamily() !!}',
-                foreColor: '{!! $chart->foreColor() !!}',
-                sparkline: {!! $chart->sparkline() !!},
-                @if($chart->stacked())
-                stacked: {!! $chart->stacked() !!},
-                @endif
-            },
-            plotOptions: {
-                bar: {!! $chart->horizontal() !!}
-            },
-            colors: {!! $chart->colors() !!},
-            series: {!! $chart->dataset() !!},
-            dataLabels: {!! $chart->dataLabels() !!},
-            @if($chart->labels())
+(function () {
+    var charts = document.querySelectorAll('[data-larapex-chart]');
 
-                labels: {!! json_encode($chart->labels(), true) !!},
-            @endif
-            title: {
-                text: "{!! $chart->title() !!}"
-            },
-            subtitle: {
-                text: '{!! $chart->subtitle() !!}',
-                align: '{!! $chart->subtitlePosition() !!}'
-            },
-            xaxis: {!! $chart->xAxis() !!},
-            yaxis: {
-                labels : {
-                    show: {!! json_encode($chart->showYAxisLabels(), true) !!},
-                }
-            },
-            @if ($chart->yAxis())
-                yaxis: {!! $chart->yAxis() !!},
-            @endif
-            grid: {!! $chart->grid() !!},
-            markers: {!! $chart->markers() !!},
-            @if($chart->stroke())
-                stroke: {!! $chart->stroke() !!},
-            @endif
-            legend: {
-                show: {!! $chart->showLegend() !!}
-            },
-            states: {!! json_encode($chart->states()['states']) !!}
-        }
+    if (!charts.length) {
+        return;
+    }
 
-        var renderChart = function() {
-            var chart = new ApexCharts(document.querySelector("#{!! $chart->id() !!}"), options);
-            chart.render();
-        };
+    function initCharts() {
+        charts.forEach(function (el) {
+            try {
+                var options = JSON.parse(el.getAttribute('data-larapex-chart'));
+                new ApexCharts(el, options).render();
+            } catch (e) {
+                console.error('LarapexCharts: failed to initialize chart #' + el.id, e);
+            }
+        });
+    }
 
-        if (window.ApexCharts) {
-            renderChart();
-            return;
-        }
+    if (window.ApexCharts) {
+        initCharts();
+        return;
+    }
 
-        var cdnScript = document.createElement('script');
-        cdnScript.src = '{!! $chart->cdn() !!}';
-        cdnScript.onload = renderChart;
-        document.head.appendChild(cdnScript);
-    })();
+    var script    = document.createElement('script');
+    script.src    = '<?php echo \vnusWilliams\LarapexCharts\LarapexChart::cdn(); ?>';
+    script.onload = initCharts;
+    document.head.appendChild(script);
+})();
 </script>

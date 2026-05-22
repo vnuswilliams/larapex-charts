@@ -373,11 +373,24 @@ class LarapexChart
         return json_encode(['"' . implode('","', $stringArray) . '"']);
     }
 
+    /**
+     * Returns the chart container div with chart options embedded in a data attribute.
+     * Use @larapexChartScripts in your layout to initialize all charts at once.
+     */
     public function container(): mixed
     {
-        return View::make('larapex-charts::chart.container', ['id' => $this->id()]);
+        return View::make('larapex-charts::chart.container', [
+            'id'        => $this->id(),
+            'chartData' => htmlspecialchars($this->toOptionsJson(), ENT_QUOTES, 'UTF-8'),
+        ]);
     }
 
+    /**
+     * @deprecated Use @larapexChartScripts directive in your layout instead.
+     *             The container() method now embeds all chart data automatically.
+     *
+     * Kept for backward compatibility — renders an inline script for this single chart.
+     */
     public function script(): mixed
     {
         return View::make('larapex-charts::chart.script', ['chart' => $this]);
@@ -538,69 +551,84 @@ class LarapexChart
 
     /*
     |--------------------------------------------------------------------------
+    | Options Builder (shared between toJson, toVue, container)
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Build the complete ApexCharts options array.
+     */
+    public function buildOptions(): array
+    {
+        $options = [
+            'chart' => [
+                'id'         => $this->id(),
+                'type'       => $this->type(),
+                'height'     => $this->height(),
+                'width'      => $this->width(),
+                'toolbar'    => json_decode($this->toolbar()),
+                'zoom'       => json_decode($this->zoom()),
+                'fontFamily' => $this->fontFamily(),
+                'foreColor'  => $this->foreColor(),
+                'sparkline'  => json_decode($this->sparkline()),
+                'stacked'    => $this->stacked(),
+            ],
+            'plotOptions' => [
+                'bar' => json_decode($this->horizontal()),
+            ],
+            'colors'     => json_decode($this->colors()),
+            'series'     => json_decode($this->dataset()),
+            'dataLabels' => json_decode($this->dataLabels()),
+            'theme'      => ['mode' => $this->theme],
+            'title'      => ['text' => $this->title()],
+            'subtitle'   => [
+                'text'  => $this->subtitle() ?: '',
+                'align' => $this->subtitlePosition() ?: '',
+            ],
+            'xaxis' => json_decode($this->xAxis()),
+            'yaxis' => [
+                'labels' => ['show' => $this->showYAxisLabels()],
+            ],
+            'grid'    => json_decode($this->grid()),
+            'markers' => json_decode($this->markers()),
+            'legend'  => ['show' => $this->showLegend() === 'true'],
+            'states'  => $this->states()['states'],
+        ];
+
+        if ($this->labels()) {
+            $options['labels'] = $this->labels();
+        }
+
+        if ($this->stroke()) {
+            $options['stroke'] = json_decode($this->stroke());
+        }
+
+        if ($this->yAxis()) {
+            $options['yaxis'] = json_decode($this->yAxis());
+        }
+
+        return $options;
+    }
+
+    /**
+     * Returns the chart options as a JSON string (used by the container data attribute).
+     */
+    public function toOptionsJson(): string
+    {
+        return json_encode($this->buildOptions());
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | JSON Options Builder
     |--------------------------------------------------------------------------
     */
 
     public function toJson(): \Illuminate\Http\JsonResponse
     {
-        $options = [
-            'chart' => [
-                'id' => $this->id(),
-                'type' => $this->type(),
-                'height' => $this->height(),
-                'width' => $this->width(),
-                'toolbar' => json_decode($this->toolbar()),
-                'zoom' => json_decode($this->zoom()),
-                'fontFamily' => json_decode($this->fontFamily()),
-                'foreColor' => $this->foreColor(),
-                'sparkline' => $this->sparkline(),
-                'stacked' => $this->stacked(),
-            ],
-            'plotOptions' => [
-                'bar' => json_decode($this->horizontal()),
-            ],
-            'colors' => json_decode($this->colors()),
-            'series' => json_decode($this->dataset()),
-            'dataLabels' => json_decode($this->dataLabels()),
-            'theme' => [
-                'mode' => $this->theme
-            ],
-            'title' => [
-                'text' => $this->title()
-            ],
-            'subtitle' => [
-                'text' => $this->subtitle() ? $this->subtitle() : '',
-                'align' => $this->subtitlePosition() ? $this->subtitlePosition() : '',
-            ],
-            'xaxis' => json_decode($this->xAxis()),
-            'yaxis' => [
-                'labels' => [
-                    'show' => $this->showYAxisLabels(),
-                ]
-            ],
-            'grid' => json_decode($this->grid()),
-            'markers' => json_decode($this->markers()),
-            'legend' => [
-                'show' => $this->showLegend()
-            ],
-            'states' => $this->states()['states'],
-        ];
-
-        if($this->labels()) {
-            $options['labels'] = $this->labels();
-        }
-
-        if($this->stroke()) {
-            $options['stroke'] = json_decode($this->stroke());
-        }
-        if($this->yAxis()) {
-            $options['yaxis'] = json_decode($this->yAxis());
-        }
-
         return response()->json([
-            'id' => $this->id(),
-            'options' => $options,
+            'id'      => $this->id(),
+            'options' => $this->buildOptions(),
         ]);
     }
 
@@ -612,65 +640,17 @@ class LarapexChart
 
     public function toVue() :array
     {
-        $options = [
-            'chart' => [
-                'id' => $this->id(),
-                'height' => $this->height(),
-                'toolbar' => json_decode($this->toolbar()),
-                'zoom' => json_decode($this->zoom()),
-                'fontFamily' => json_decode($this->fontFamily()),
-                'foreColor' => $this->foreColor(),
-                'sparkline' => json_decode($this->sparkline()),
-                'stacked' => $this->stacked(),
-            ],
-            'plotOptions' => [
-                'bar' => json_decode($this->horizontal()),
-            ],
-            'colors' => json_decode($this->colors()),
-            'dataLabels' => json_decode($this->dataLabels()),
-            'theme' => [
-                'mode' => $this->theme
-            ],
-            'title' => [
-                'text' => $this->title()
-            ],
-            'subtitle' => [
-                'text' => $this->subtitle() ? $this->subtitle() : '',
-                'align' => $this->subtitlePosition() ? $this->subtitlePosition() : '',
-            ],
-            'xaxis' => json_decode($this->xAxis()),
-            'yaxis' => [
-                'labels' => [
-                    'show' => $this->showYAxisLabels(),
-                ]
-            ],
-            'grid' => json_decode($this->grid()),
-            'markers' => json_decode($this->markers()),
-            'legend' => [
-                'show' => $this->showLegend()
-            ],
-            'states' => $this->states()['states'],
-        ];
+        $options = $this->buildOptions();
 
-        if($this->labels()) {
-            $options['labels'] = $this->labels();
-        }
-
-        if($this->stroke()) {
-            $options['stroke'] = json_decode($this->stroke());
-        }
-
-        if($this->yAxis()) {
-            $options['yaxis'] = json_decode($this->yAxis());
-        }
+        // Vue uses height/width at the top level, not nested in chart
+        unset($options['chart']['stacked']);
 
         return [
-            'height' => $this->height(),
-            'width' => $this->width(),
-            'type' => $this->type(),
+            'height'  => $this->height(),
+            'width'   => $this->width(),
+            'type'    => $this->type(),
             'options' => $options,
-            'series' => json_decode($this->dataset()),
+            'series'  => json_decode($this->dataset()),
         ];
     }
 }
-

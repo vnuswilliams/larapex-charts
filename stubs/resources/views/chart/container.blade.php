@@ -1,1 +1,1 @@
-<div id="{!! $id !!}"></div>
+<div id="{!! $id !!}" data-larapex-chart="{!! $chartData !!}"></div>

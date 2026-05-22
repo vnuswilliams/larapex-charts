@@ -2,6 +2,7 @@
 
 namespace vnusWilliams\LarapexCharts;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class LarapexChartsServiceProvider extends ServiceProvider
@@ -55,6 +56,20 @@ class LarapexChartsServiceProvider extends ServiceProvider
             $this->packageBasePath('stubs/stubs') => base_path('stubs')
         ], 'larapex-charts-stubs');
 
+        /*
+        |--------------------------------------------------------------------------
+        | @larapexChartScripts Blade Directive
+        |--------------------------------------------------------------------------
+        |
+        | Place @larapexChartScripts just before </body> in your main layout.
+        | It scans the page for every [data-larapex-chart] element and initializes
+        | the corresponding ApexChart instance. If no chart elements are found,
+        | nothing is rendered — zero overhead for pages without charts.
+        |
+        */
+        Blade::directive('larapexChartScripts', function () {
+            return "<?php echo view('larapex-charts::chart.scripts')->render(); ?>";
+        });
     }
 
     public function packageBasePath(string $path = ''): string
