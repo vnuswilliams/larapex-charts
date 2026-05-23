@@ -89,6 +89,40 @@ Then in your view (Blade file) add:
 
 `$chart->script()` first uses `window.ApexCharts` (useful when ApexCharts is loaded via npm/Vite), and automatically falls back to the CDN only if ApexCharts is not already available globally.
 
+
+### Livewire support (v2 & v3)
+
+If you render charts inside Livewire components (including conditional rendering/tabs/selectors), keep using the same API:
+
+```blade
+{!! $chart->container() !!}
+```
+
+Then place the global script directive once in your main layout (before `</body>`):
+
+```blade
+@larapexChartScripts
+```
+
+The directive now automatically:
+
+- initializes all charts found in the page,
+- re-initializes charts after Livewire DOM updates,
+- destroys stale chart instances when elements disappear,
+- keeps working normally in non-Livewire projects.
+
+Optional: if you update data from Livewire and need a full page chart refresh, emit:
+
+```php
+$this->dispatch('larapex:refresh'); // Livewire v3
+```
+
+or
+
+```php
+$this->emit('larapex:refresh'); // Livewire v2
+```
+
 ### More complex example
 
 ```php
