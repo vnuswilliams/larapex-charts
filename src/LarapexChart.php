@@ -572,6 +572,7 @@ class LarapexChart
                 'foreColor'  => $this->foreColor(),
                 'sparkline'  => json_decode($this->sparkline()),
                 'stacked'    => $this->stacked(),
+                	
             ],
             'plotOptions' => [
                 'bar' => json_decode($this->horizontal()),
@@ -579,8 +580,7 @@ class LarapexChart
             'colors'     => json_decode($this->colors()),
             'series'     => json_decode($this->dataset()),
             'dataLabels' => json_decode($this->dataLabels()),
-            'theme'      => ['mode' => $this->theme],
-            'title'      => ['text' => $this->title()],
+          'title'      => ['text' => $this->title()],
             'subtitle'   => [
                 'text'  => $this->subtitle() ?: '',
                 'align' => $this->subtitlePosition() ?: '',
